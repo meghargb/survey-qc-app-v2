@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+survey_qc.db
+uploaded_files/
+.streamlit/secrets.toml
+.env

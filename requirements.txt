@@ -1,0 +1,10 @@
+streamlit>=1.62.0
+sqlalchemy>=2.0.35
+pandas>=2.2.3
+anthropic>=0.69.0
+httpx>=0.28.1
+python-dotenv>=1.0.1
+openpyxl>=3.1.5
+python-docx>=1.1.2
+python-pptx>=1.0.2
+pyreadstat>=1.2.7
