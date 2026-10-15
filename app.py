@@ -29,7 +29,23 @@ import ui_dashboard
 
 st.set_page_config(page_title="Survey Data QC Tool", page_icon="📊", layout="wide")
 
-Base.metadata.create_all(bind=engine)
+
+
+@st.cache_resource
+def _init_db():
+    """Create tables once per server process. Streamlit reruns this script for
+    every session/interaction, and concurrent runs can race to create the same
+    table ("table users already exists"), so we run it once and tolerate that."""
+    from sqlalchemy.exc import OperationalError
+    try:
+        Base.metadata.create_all(bind=engine, checkfirst=True)
+    except OperationalError as e:
+        if "already exists" not in str(e):
+            raise
+    return True
+
+
+_init_db()
 
 UPLOAD_DIR = "uploaded_files"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
